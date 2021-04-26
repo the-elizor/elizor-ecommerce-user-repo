@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\elizor.ecommerce.user.business\elizor.ecommerce.user.business.csproj" />
+    <ProjectReference Include="..\elizor.ecommerce.user.contracts\elizor.ecommerce.user.contracts.csproj" />
+    <ProjectReference Include="..\elizor.ecommerce.user.data\elizor.ecommerce.user.data.csproj" />
+    <ProjectReference Include="..\elizor.ecommerce.user.dbcontext.tables\elizor.ecommerce.user.dbcontext.tables.csproj" />
+    <ProjectReference Include="..\elizor.ecommerce.user.shared\elizor.ecommerce.user.shared.csproj" />
+  </ItemGroup>
+
+</Project>
