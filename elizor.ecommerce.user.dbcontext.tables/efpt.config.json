@@ -14,10 +14,18 @@
    "Tables": [
       {
          "HasPrimaryKey": true,
-         "Name": "myguests"
+         "Name": "eep_t_client"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "eep_t_currency"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "eep_t_customer"
       }
    ],
-   "UseDatabaseNames": false,
+   "UseDatabaseNames": true,
    "UseDbContextSplitting": false,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
