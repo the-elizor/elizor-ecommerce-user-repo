@@ -7,56 +7,195 @@ namespace elizor.ecommerce.user.dbcontext.tables
 {
     public partial class UserContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseMySql("server=localhost;port=3306;database=test;user=root;password=eit@123")
-                              .EnableSensitiveDataLogging()
-                              .EnableDetailedErrors();
-            }
-        }
+        //public UserContext()
+        //{
+        //}
 
         public UserContext(DbContextOptions<UserContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<Myguests> Myguests { get; set; }
+        public virtual DbSet<eep_t_client> eep_t_client { get; set; }
+        public virtual DbSet<eep_t_currency> eep_t_currency { get; set; }
+        public virtual DbSet<eep_t_customer> eep_t_customer { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Myguests>(entity =>
+            modelBuilder.Entity<eep_t_client>(entity =>
             {
-                entity.ToTable("myguests");
+                entity.HasIndex(e => e.ClientName)
+                    .HasName("UK_ClientClientName")
+                    .IsUnique();
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.HasIndex(e => e.EEP_T_CurrencyId)
+                    .HasName("FK_Client_CurrencyId");
 
-                entity.Property(e => e.Email)
-                    .HasColumnName("email")
+                entity.Property(e => e.Id)
                     .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
 
-                entity.Property(e => e.Firstname)
+                entity.Property(e => e.ClientDetails)
+                    .HasColumnType("varchar(1000)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.ClientName)
                     .IsRequired()
-                    .HasColumnName("firstname")
-                    .HasColumnType("varchar(30)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
 
-                entity.Property(e => e.Lastname)
+                entity.Property(e => e.CreatedBy)
                     .IsRequired()
-                    .HasColumnName("lastname")
-                    .HasColumnType("varchar(30)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
+                    .HasColumnType("varchar(128)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
 
-                entity.Property(e => e.RegDate)
-                    .HasColumnName("reg_date")
-                    .HasColumnType("timestamp")
-                    .HasDefaultValueSql("CURRENT_TIMESTAMP")
-                    .ValueGeneratedOnAddOrUpdate();
+                entity.Property(e => e.EEP_T_CurrencyId)
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.Status).HasDefaultValueSql("'1'");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnType("varchar(128)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.HasOne(d => d.EEP_T_Currency)
+                    .WithMany(p => p.eep_t_client)
+                    .HasForeignKey(d => d.EEP_T_CurrencyId)
+                    .HasConstraintName("FK_Client_CurrencyId");
+            });
+
+            modelBuilder.Entity<eep_t_currency>(entity =>
+            {
+                entity.HasIndex(e => e.CurrencyCode)
+                    .HasName("UK_CurrencyCurrencyCode")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasColumnType("varchar(128)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.CurrencyCode)
+                    .IsRequired()
+                    .HasColumnType("varchar(10)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.CurrencyName)
+                    .IsRequired()
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.DisplayName)
+                    .IsRequired()
+                    .HasColumnType("varchar(100)")
+                    .HasDefaultValueSql("''")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.Status).HasDefaultValueSql("'1'");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnType("varchar(128)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+            });
+
+            modelBuilder.Entity<eep_t_customer>(entity =>
+            {
+                entity.HasIndex(e => e.EEP_T_ClientId)
+                    .HasName("FK_CustomerClientId");
+
+                entity.HasIndex(e => e.EEP_T_TitleId)
+                    .HasName("FK_CustomerTitleId");
+
+                entity.Property(e => e.Id)
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasColumnType("varchar(128)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.EEP_T_ClientId)
+                    .IsRequired()
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.EEP_T_TitleId)
+                    .IsRequired()
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.EmailAddress)
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.HearAbout)
+                    .HasColumnType("varchar(1000)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasColumnType("varchar(100)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.MobileNo)
+                    .IsRequired()
+                    .HasColumnType("varchar(20)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.PromotionChannel)
+                    .HasColumnType("varchar(1000)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.Status).HasDefaultValueSql("'1'");
+
+                entity.Property(e => e.TelNo)
+                    .HasColumnType("varchar(20)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnType("varchar(128)")
+                    .HasCharSet("utf8")
+                    .HasCollation("utf8_general_ci");
+
+                entity.HasOne(d => d.EEP_T_Client)
+                    .WithMany(p => p.eep_t_customer)
+                    .HasForeignKey(d => d.EEP_T_ClientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CustomerClientId");
             });
 
             OnModelCreatingPartial(modelBuilder);

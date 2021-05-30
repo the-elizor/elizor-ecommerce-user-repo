@@ -1,4 +1,4 @@
-﻿// <copyright file="MyGuest.cs" company="Elizor (Pvt) Ltd">
+﻿// <copyright file="RequestActions.cs" company="Elizor (Pvt) Ltd">
 // Copyright (c) Elizor (Pvt) Ltd, 2021 
 //		All Rights Reserved.
 //		This unpublished material is proprietary to Elizor. The methods and techniques described herein are considered trade secrets (copyright) and/or confidential.
@@ -12,13 +12,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace elizor.ecommerce.user.entities.test
+namespace elizor.ecommerce.user.shared.Common
 {
-    public class MyGuest
+    /// <summary>
+    /// RequestActions
+    /// </summary>
+    public static class RequestActions
     {
-        public uint Id { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Email { get; set; }
+        /// <summary>
+        /// The create
+        /// </summary>
+        public const string Create = "create";
+
+        /// <summary>
+        /// The Validate Otp
+        /// </summary>
+        public const string ValidateOtp = "validateOTP";
+
+        /// <summary>
+        /// The Login
+        /// </summary>
+        public const string Login = "login";
     }
 }

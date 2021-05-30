@@ -9,4 +9,12 @@
     <ProjectReference Include="..\elizor.ecommerce.user.shared\elizor.ecommerce.user.shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="5.1.0" />
+  </ItemGroup>
+
 </Project>

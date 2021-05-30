@@ -1,4 +1,4 @@
-﻿// <copyright file="MyGuest.cs" company="Elizor (Pvt) Ltd">
+﻿// <copyright file="LoginValidator.cs" company="Elizor (Pvt) Ltd">
 // Copyright (c) Elizor (Pvt) Ltd, 2021 
 //		All Rights Reserved.
 //		This unpublished material is proprietary to Elizor. The methods and techniques described herein are considered trade secrets (copyright) and/or confidential.
@@ -12,13 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace elizor.ecommerce.user.entities.test
+namespace elizor.ecommerce.user.business.Validators
 {
-    public class MyGuest
+    class LoginValidator
     {
-        public uint Id { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string Email { get; set; }
     }
 }

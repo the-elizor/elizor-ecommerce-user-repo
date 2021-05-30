@@ -16,6 +16,7 @@
     <ProjectReference Include="..\elizor.ecommerce.user.contracts\elizor.ecommerce.user.contracts.csproj" />
     <ProjectReference Include="..\elizor.ecommerce.user.data\elizor.ecommerce.user.data.csproj" />
     <ProjectReference Include="..\elizor.ecommerce.user.dbcontext.tables\elizor.ecommerce.user.dbcontext.tables.csproj" />
+    <ProjectReference Include="..\elizor.ecommerce.user.resources\elizor.ecommerce.user.resources.csproj" />
     <ProjectReference Include="..\elizor.ecommerce.user.shared\elizor.ecommerce.user.shared.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿// <copyright file="ConnectionString.cs" company="Elizor (Pvt) Ltd">
+﻿// <copyright file="ErrorMessages.cs" company="Elizor (Pvt) Ltd">
 // Copyright (c) Elizor (Pvt) Ltd, 2021 
 //		All Rights Reserved.
 //		This unpublished material is proprietary to Elizor. The methods and techniques described herein are considered trade secrets (copyright) and/or confidential.
@@ -6,25 +6,32 @@
 // </copyright>
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+using elizor.ecommerce.user.contracts.Common;
+using elizor.ecommerce.user.shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace elizor.ecommerce.user.entities.connection
+namespace elizor.ecommerce.user.resources.Exceptions
 {
-    /// <summary>
-    /// ConnectionString
-    /// </summary>
-    public static class ConnectionString
+    public class ErrorMessages : IErrorMessages
     {
         /// <summary>
-        /// Gets or sets the client connection string.
+        /// Gets the message server error.
         /// </summary>
-        /// <value>
-        /// The client connection string.
-        /// </value>
-        public static string ClientConnectionString { get; set; }
+        /// <returns></returns>
+        public ResponseMessage GetMessageServerError() => new ResponseMessage
+        {
+            Code = "E0001",
+            Message = error.E0001
+        };
+
+        ResponseMessage IErrorMessages.GetMessageUserNotFoundError() => new ResponseMessage
+        {
+            Code = "E0002",
+            Message = error.E0002
+        };
     }
 }

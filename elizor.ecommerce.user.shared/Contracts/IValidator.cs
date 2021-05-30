@@ -1,4 +1,4 @@
-﻿// <copyright file="IMapper.cs" company="Elizor (Pvt) Ltd">
+﻿// <copyright file="IValidator.cs" company="Elizor (Pvt) Ltd">
 // Copyright (c) Elizor (Pvt) Ltd, 2021 
 //		All Rights Reserved.
 //		This unpublished material is proprietary to Elizor. The methods and techniques described herein are considered trade secrets (copyright) and/or confidential.
@@ -6,6 +6,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+using elizor.ecommerce.user.shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,29 @@ using System.Threading.Tasks;
 namespace elizor.ecommerce.user.shared.Contracts
 {
     /// <summary>
-    /// IMapper
+    /// IValidator
     /// </summary>
-    /// <typeparam name="TInput">The type of the input.</typeparam>
-    /// <typeparam name="TOutput">The type of the output.</typeparam>
-    public interface IMapper<in TInput, out TOutput>
+    /// <typeparam name="T"></typeparam>
+    /// <seealso cref="System.IDisposable" />
+    public interface IValidator<in T> : IDisposable
     {
         /// <summary>
-        /// Maps the specified input.
+        /// Validates the specified object.
         /// </summary>
-        /// <param name="input">The input.</param>
+        /// <param name="obj">The object.</param>
+        /// <param name="messages">The messages.</param>
         /// <returns></returns>
-        TOutput Map(TInput input);
+        bool Validate(T obj, out ResponseMessage message);
+
+        /// <summary>
+        /// Is match
+        /// </summary>
+        /// <param name="id">Id for match</param>
+        bool IsMatch(string id);
+
+        /// <summary>
+        /// To get validator order
+        /// </summary>
+        int GetOrder();
     }
 }
